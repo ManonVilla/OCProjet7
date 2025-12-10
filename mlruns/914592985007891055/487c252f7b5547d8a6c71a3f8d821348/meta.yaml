@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/487c252f7b5547d8a6c71a3f8d821348/artifacts
+end_time: 1765385666440
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 487c252f7b5547d8a6c71a3f8d821348
+run_name: aged-perch-325
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765385666403
+status: 3
+tags: []
+user_id: manon
