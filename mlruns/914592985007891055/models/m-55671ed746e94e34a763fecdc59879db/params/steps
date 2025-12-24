@@ -1,0 +1,1 @@
+[('imputer', SimpleImputer(strategy='median')), ('scaler', StandardScaler()), ('model', LogisticRegression(C=100, solver='liblinear'))]

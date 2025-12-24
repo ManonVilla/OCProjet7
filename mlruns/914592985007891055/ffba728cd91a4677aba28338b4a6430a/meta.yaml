@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/ffba728cd91a4677aba28338b4a6430a/artifacts
+end_time: 1766582722354
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: ffba728cd91a4677aba28338b4a6430a
+run_name: skittish-eel-220
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766582643320
+status: 3
+tags: []
+user_id: manon

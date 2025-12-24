@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/93d152297bea40488f6db0b79b7ac60b/artifacts
+end_time: 1766582640249
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 93d152297bea40488f6db0b79b7ac60b
+run_name: tasteful-wren-735
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766580685380
+status: 3
+tags: []
+user_id: manon

@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/57a1407bd33848c4b555c0be4d0b1e29/artifacts
+end_time: 1766589208863
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 57a1407bd33848c4b555c0be4d0b1e29
+run_name: caring-bear-243
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766588112754
+status: 3
+tags: []
+user_id: manon

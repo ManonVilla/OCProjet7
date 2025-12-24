@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/e2b0e7c375b54f9cbece8e9c918d434b/artifacts
+end_time: 1766583392702
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: e2b0e7c375b54f9cbece8e9c918d434b
+run_name: learned-toad-203
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766583058211
+status: 3
+tags: []
+user_id: manon

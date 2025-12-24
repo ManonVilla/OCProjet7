@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/436db4862cfd431594b147c2872d2f82/artifacts
+end_time: 1766583057913
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 436db4862cfd431594b147c2872d2f82
+run_name: GS_XGBClassifier
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766582725600
+status: 3
+tags: []
+user_id: manon

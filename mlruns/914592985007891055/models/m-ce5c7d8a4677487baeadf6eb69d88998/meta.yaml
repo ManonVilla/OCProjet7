@@ -1,0 +1,10 @@
+artifact_location: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/models/m-ce5c7d8a4677487baeadf6eb69d88998/artifacts
+creation_timestamp: 1766583041278
+experiment_id: '914592985007891055'
+last_updated_timestamp: 1766583045238
+model_id: m-ce5c7d8a4677487baeadf6eb69d88998
+model_type: null
+name: model
+source_run_id: 436db4862cfd431594b147c2872d2f82
+status: 2
+status_message: null

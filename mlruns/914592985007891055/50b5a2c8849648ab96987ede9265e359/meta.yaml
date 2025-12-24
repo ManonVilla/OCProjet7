@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/50b5a2c8849648ab96987ede9265e359/artifacts
+end_time: 1766589302804
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 50b5a2c8849648ab96987ede9265e359
+run_name: adaptable-duck-382
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766589211546
+status: 3
+tags: []
+user_id: manon

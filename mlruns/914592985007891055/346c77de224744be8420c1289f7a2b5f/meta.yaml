@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/346c77de224744be8420c1289f7a2b5f/artifacts
+end_time: 1766580684340
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 346c77de224744be8420c1289f7a2b5f
+run_name: Dummy Model
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766580676641
+status: 3
+tags: []
+user_id: manon

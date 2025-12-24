@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/d93ebfbd5d0d4a08b00358c3fd7affa8/artifacts
+end_time: 1766583055297
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: d93ebfbd5d0d4a08b00358c3fd7affa8
+run_name: burly-lark-114
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766582725600
+status: 3
+tags: []
+user_id: manon

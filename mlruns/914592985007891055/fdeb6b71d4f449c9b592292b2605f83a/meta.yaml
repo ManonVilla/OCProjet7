@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/fdeb6b71d4f449c9b592292b2605f83a/artifacts
+end_time: 1766587912297
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: fdeb6b71d4f449c9b592292b2605f83a
+run_name: GS_LGBMClassifier
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766587714285
+status: 3
+tags: []
+user_id: manon

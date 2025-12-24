@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/b184cc066c8f40bdb49573b9a5c10936/artifacts
+end_time: 1766582722354
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: b184cc066c8f40bdb49573b9a5c10936
+run_name: placid-ant-173
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766582643320
+status: 3
+tags: []
+user_id: manon

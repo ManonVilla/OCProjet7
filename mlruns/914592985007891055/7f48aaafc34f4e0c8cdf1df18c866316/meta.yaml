@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/7f48aaafc34f4e0c8cdf1df18c866316/artifacts
+end_time: 1766582722354
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 7f48aaafc34f4e0c8cdf1df18c866316
+run_name: sedate-bee-537
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766582643320
+status: 3
+tags: []
+user_id: manon
