@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/b09ea6333b0d43b0a70d99e54201a8f3/artifacts
+end_time: 1765467821007
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: b09ea6333b0d43b0a70d99e54201a8f3
+run_name: unique-zebra-630
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765467745485
+status: 3
+tags: []
+user_id: manon

@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/2c6cd99217974e4c865a04f6b4b561ba/artifacts
+end_time: 1765710265960
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 2c6cd99217974e4c865a04f6b4b561ba
+run_name: defiant-penguin-757
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765709790154
+status: 3
+tags: []
+user_id: manon

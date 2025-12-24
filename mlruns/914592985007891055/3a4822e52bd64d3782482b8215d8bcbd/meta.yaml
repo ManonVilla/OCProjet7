@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/3a4822e52bd64d3782482b8215d8bcbd/artifacts
+end_time: 1766235015018
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 3a4822e52bd64d3782482b8215d8bcbd
+run_name: serious-calf-425
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766234719877
+status: 3
+tags: []
+user_id: manon

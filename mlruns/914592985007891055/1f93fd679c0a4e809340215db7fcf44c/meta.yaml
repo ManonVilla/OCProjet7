@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/1f93fd679c0a4e809340215db7fcf44c/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 1f93fd679c0a4e809340215db7fcf44c
+run_name: GS_LogisticRegression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765462821378
+status: 1
+tags: []
+user_id: manon

@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/07e2104a278749a19446c4b93a99022f/artifacts
+end_time: 1766166495763
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 07e2104a278749a19446c4b93a99022f
+run_name: GS_RandomForestClassifier
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766166398149
+status: 3
+tags: []
+user_id: manon

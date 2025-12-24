@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/7eb8f9a93bb94aa0a361c12b90cfe5ff/artifacts
+end_time: 1766162513545
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 7eb8f9a93bb94aa0a361c12b90cfe5ff
+run_name: rumbling-cow-804
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766161483276
+status: 3
+tags: []
+user_id: manon

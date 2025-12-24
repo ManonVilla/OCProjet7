@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/d6dec954c91e45fcb21b1820ce857a55/artifacts
+end_time: 1766166829814
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: d6dec954c91e45fcb21b1820ce857a55
+run_name: awesome-smelt-99
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766166495769
+status: 3
+tags: []
+user_id: manon

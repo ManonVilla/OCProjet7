@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/26d0da754f1a415686faf3928e6ca20c/artifacts
+end_time: 1766162513545
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 26d0da754f1a415686faf3928e6ca20c
+run_name: bright-worm-398
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766161483276
+status: 3
+tags: []
+user_id: manon

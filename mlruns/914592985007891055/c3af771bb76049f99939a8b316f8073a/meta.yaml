@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/c3af771bb76049f99939a8b316f8073a/artifacts
+end_time: 1766162584312
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: c3af771bb76049f99939a8b316f8073a
+run_name: intelligent-ram-549
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766162515594
+status: 3
+tags: []
+user_id: manon

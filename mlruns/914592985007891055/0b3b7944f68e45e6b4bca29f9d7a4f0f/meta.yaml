@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/0b3b7944f68e45e6b4bca29f9d7a4f0f/artifacts
+end_time: 1765709651385
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 0b3b7944f68e45e6b4bca29f9d7a4f0f
+run_name: big-snipe-311
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765707571675
+status: 3
+tags: []
+user_id: manon

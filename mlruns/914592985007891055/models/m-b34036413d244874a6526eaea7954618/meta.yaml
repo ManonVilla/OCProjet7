@@ -1,0 +1,10 @@
+artifact_location: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/models/m-b34036413d244874a6526eaea7954618/artifacts
+creation_timestamp: 1766162509648
+experiment_id: '914592985007891055'
+last_updated_timestamp: 1766162513528
+model_id: m-b34036413d244874a6526eaea7954618
+model_type: null
+name: best_estimator
+source_run_id: 7309fc6b94dd403699c971bdae7a214c
+status: 2
+status_message: null

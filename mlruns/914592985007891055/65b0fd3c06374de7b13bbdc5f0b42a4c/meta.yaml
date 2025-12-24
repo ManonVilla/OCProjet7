@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/65b0fd3c06374de7b13bbdc5f0b42a4c/artifacts
+end_time: 1765461638434
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 65b0fd3c06374de7b13bbdc5f0b42a4c
+run_name: spiffy-calf-653
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765460626228
+status: 3
+tags: []
+user_id: manon

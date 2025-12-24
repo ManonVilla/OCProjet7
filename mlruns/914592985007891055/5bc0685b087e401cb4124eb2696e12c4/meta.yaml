@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/5bc0685b087e401cb4124eb2696e12c4/artifacts
+end_time: 1766235590263
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 5bc0685b087e401cb4124eb2696e12c4
+run_name: omniscient-shark-226
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766235346802
+status: 3
+tags: []
+user_id: manon

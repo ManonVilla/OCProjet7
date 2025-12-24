@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/50d947f524674a3aaa7a7df80d887f34/artifacts
+end_time: 1765464781414
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 50d947f524674a3aaa7a7df80d887f34
+run_name: traveling-fawn-124
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765463699897
+status: 3
+tags: []
+user_id: manon

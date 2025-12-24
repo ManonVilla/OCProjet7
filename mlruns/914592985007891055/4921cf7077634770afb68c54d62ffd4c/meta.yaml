@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/4921cf7077634770afb68c54d62ffd4c/artifacts
+end_time: 1765710265960
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 4921cf7077634770afb68c54d62ffd4c
+run_name: ambitious-loon-295
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765709790154
+status: 3
+tags: []
+user_id: manon

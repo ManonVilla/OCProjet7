@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/db635b30fc0f42f4995fb4722ca435b4/artifacts
+end_time: 1765466655817
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: db635b30fc0f42f4995fb4722ca435b4
+run_name: intelligent-mouse-63
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765465756897
+status: 3
+tags: []
+user_id: manon

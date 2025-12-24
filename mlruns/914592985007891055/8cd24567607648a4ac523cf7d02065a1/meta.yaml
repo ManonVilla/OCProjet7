@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/8cd24567607648a4ac523cf7d02065a1/artifacts
+end_time: 1765467821007
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 8cd24567607648a4ac523cf7d02065a1
+run_name: orderly-skink-327
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765467745485
+status: 3
+tags: []
+user_id: manon

@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/648d05d230464f6698475a51c6be809b/artifacts
+end_time: 1765709651385
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 648d05d230464f6698475a51c6be809b
+run_name: shivering-shrew-837
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765707571675
+status: 3
+tags: []
+user_id: manon

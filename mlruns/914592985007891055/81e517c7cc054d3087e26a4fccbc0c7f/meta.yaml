@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/81e517c7cc054d3087e26a4fccbc0c7f/artifacts
+end_time: 1766166395408
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 81e517c7cc054d3087e26a4fccbc0c7f
+run_name: wistful-ant-451
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766164442358
+status: 3
+tags: []
+user_id: manon

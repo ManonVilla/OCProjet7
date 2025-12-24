@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/e63b41a81ee34e4eac0484e64667c95e/artifacts
+end_time: 1765467821007
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: e63b41a81ee34e4eac0484e64667c95e
+run_name: zealous-snake-32
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765467745485
+status: 3
+tags: []
+user_id: manon

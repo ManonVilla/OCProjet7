@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/d7b8bd19a939478eb6eb17841d404d2a/artifacts
+end_time: 1765709651385
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: d7b8bd19a939478eb6eb17841d404d2a
+run_name: omniscient-stork-416
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765707571675
+status: 3
+tags: []
+user_id: manon

@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/e5c26c77b3cf4193b5d1a2c262a6c812/artifacts
+end_time: 1765467821007
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: e5c26c77b3cf4193b5d1a2c262a6c812
+run_name: judicious-pig-242
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765467745485
+status: 3
+tags: []
+user_id: manon

@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/manon/Documents/GitHub/OCProjet7/mlruns/914592985007891055/85277c226c29401781a006f526375ec3/artifacts
+end_time: 1766163271745
+entry_point_name: ''
+experiment_id: '914592985007891055'
+lifecycle_stage: active
+run_id: 85277c226c29401781a006f526375ec3
+run_name: nimble-dove-493
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766162907889
+status: 3
+tags: []
+user_id: manon
