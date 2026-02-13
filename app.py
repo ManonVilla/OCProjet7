@@ -40,4 +40,4 @@ def predict(client_data: ClientData):
 
 #à mettre dans le terminal : uvicorn app:app --reload OU python app.py avec ça : 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -38,7 +38,7 @@ st.subheader(f"Informations sur le client {client_id}")
 if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
     data_json_str = client_row.to_json()
     data_dict = json.loads(data_json_str)
-    api_url = "http://127.0.0.1:8000/predict"
+    api_url = "http://api:8000/predict"
     with st.spinner("Analyse en cours..."):
         response = requests.post(api_url, json={"data": data_dict})
     if response.status_code == 200:
