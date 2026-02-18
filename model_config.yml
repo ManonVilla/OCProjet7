@@ -1,0 +1,23 @@
+model:
+  type: LGBMClassifier
+  version: v1.0
+  trained_date: '2026-01-29 14:20:52'
+  framework: scikit-learn + lightgbm
+hyperparameters:
+  boosting_type: gbdt
+  class_weight: balanced
+  colsample_bytree: 0.7
+  learning_rate: 0.02
+  max_depth: -1
+  n_estimators: 1000
+  num_leaves: 34
+  subsample: 0.8
+  random_state: 42
+preprocessing:
+  imputation_strategy: median
+  scaling: StandardScaler
+  object_to_numeric: true
+threshold:
+  optimal_threshold: 0.35
+  default_threshold: 0.5
+  optimization_metric: business_cost

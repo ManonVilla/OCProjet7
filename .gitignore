@@ -1,7 +1,6 @@
 *.parquet
 *.csv
-*.yaml
-*.yml
+
 
 *.html
 
