@@ -38,7 +38,7 @@ st.subheader(f"Informations sur le client {client_id}")
 if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
     data_json_str = client_row.to_json()
     data_dict = json.loads(data_json_str)
-    api_url = os.getenv("API_URL", "https://ton-api-p7.onrender.com/predict")
+    api_url = "https://ocprojet7.onrender.com"
     with st.spinner("Analyse en cours..."):
         response = requests.post(api_url, json={"data": data_dict})
     if response.status_code == 200:
