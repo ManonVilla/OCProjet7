@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import requests
@@ -18,8 +19,9 @@ st.title("👩‍💻 Dashboard d'aide à la prise de décision pour les prêts 
 
 @st.cache_data #pour garder les données en cache et éviter de les recharger à chaque interaction
 def load_data():
-    # Charger les données depuis le fichier CSV
-    df = pd.read_parquet(r'prod\X_test.parquet')
+    current_dir = os.path.dirname(__file__)
+    file_path = os.path.join(current_dir, 'X_test.parquet')
+    df = pd.read_parquet(file_path)
     return df
 
 df = load_data()
