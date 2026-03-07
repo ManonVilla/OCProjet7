@@ -1,0 +1,22 @@
+venv/
+env/
+P7_Clean/
+.anaconda/
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+.git/
+.gitignore
+
+mlruns/
+
+application_test.csv
+application_train.csv 
+bureau.csv bureau_balance.csv credit_card_balance.csv installments_payments.csv POS_CASH_balance.csv previous_application.csv
+sample_submission.csv
+HomeCredit_columns_description.csv
+
+MV_P7_DS_1.ipynb
+MV_P7_DS_2.ipynb

@@ -19,4 +19,4 @@ EXPOSE 8501
 
 # 7. La commande de démarrage quand on lance le conteneur
 # Remplace 'dashboard.py' par le vrai nom de ton fichier Streamlit
-CMD ["streamlit", "run", "dashboard_P7.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "dashboard_P8.py", "--server.port=8501", "--server.address=0.0.0.0"]
