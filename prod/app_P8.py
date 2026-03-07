@@ -12,7 +12,7 @@ app = FastAPI()
 with open('modele_final_complet.pkl', 'rb') as f: #'rb' pour préciser qu'il doit le lire sans rien modifier, et pas en mode texte
     model = joblib.load(f)
 
-explainer = shap.TreeExplainer(model)  
+explainer = shap.TreeExplainer(model[-1])  
 
 #Pour définir ce que le modèle attend en entrée, on crée une classe qui hérite de BaseModel de Pydantic
 class ClientData(BaseModel):
