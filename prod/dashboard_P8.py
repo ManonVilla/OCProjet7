@@ -1,3 +1,4 @@
+import io
 import os
 import matplotlib
 matplotlib.use('Agg')
@@ -82,7 +83,12 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
         fig_shap = plt.gcf()
         fig_shap.set_size_inches(10, 6)
         fig_shap.tight_layout()
-        st.pyplot(fig_shap, clear_figure=True)
+
+        buf = io.BytesIO()
+        fig_shap.savefig(buf, format='png', bbox_inches='tight', dpi=150)
+        buf.seek(0)
+        st.image(buf)
+        plt.close('all')
     else:
         st.error(f"Erreur lors de l'analyse du dossier. Veuillez réessayer. Code d'erreur : {response.status_code}")
 
