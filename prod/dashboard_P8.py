@@ -24,6 +24,5 @@ client_id = st.sidebar.selectbox(
 
 # Stockage dans session_state pour que toutes les pages y aient accès
 st.session_state["client_id"] = client_id
-st.session_state["df"] = df
 
 st.info("👈 Sélectionnez un client dans la barre latérale, puis naviguez vers une page.")
