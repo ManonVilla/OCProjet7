@@ -29,7 +29,7 @@ def predict(client_data: ClientData):
         if col in input_data.columns:
             input_data = input_data.drop(columns=[col])
 
-
+    input_data = input_data.apply(pd.to_numeric, errors='ignore') # Convertir les colonnes en numérique si possible, sinon les laisser telles quelles (par exemple pour les variables catégorielles encodées)
     # Faire la prédiction avec le modèle chargé
     prediction = model.predict(input_data)
     
