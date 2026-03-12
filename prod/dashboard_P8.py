@@ -67,17 +67,18 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
         base_value = result['base_value']
         feature_names = result['feature_names']
         client_data_values = client_row[feature_names].values
+        
         explanation = shap.Explanation(
-        values=shap_values_array,
-        base_values=base_value,
-        data=client_data_values,
-        feature_names=feature_names
+            values=shap_values_array,
+            base_values=base_value,
+            data=client_data_values,
+            feature_names=feature_names
         )
-
-        fig_shap, ax = plt.subplots(figsize=(10, 6))
-        shap.plots.waterfall(explanation, show=False, max_display=10) 
-        st.pyplot(fig_shap)
-        plt.close(fig_shap)
+        plt.clf()
+        shap.plots.waterfall(explanation, show=False, max_display=10)
+        fig_shap = plt.gcf()
+        fig_shap.set_size_inches(10, 6)
+        st.pyplot(fig_shap, clear_figure=True)
     else:
         st.error(f"Erreur lors de l'analyse du dossier. Veuillez réessayer. Code d'erreur : {response.status_code}")
 
