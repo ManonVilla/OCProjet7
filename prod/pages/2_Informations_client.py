@@ -48,4 +48,4 @@ with st.expander("🔎 Voir toutes les variables brutes du client"):
     client_df = client_row.to_frame(name="Valeur").reset_index()
     client_df.columns = ["Variable", "Valeur"]
     client_df = client_df.astype(str)
-    st.dataframe(client_df, use_container_width=True, height=400)
+    st.table(client_df)

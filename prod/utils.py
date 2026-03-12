@@ -43,16 +43,8 @@ def to_years(df, col):
 
 @st.cache_data
 def load_data():
-    import pyarrow.parquet as pq
-    import pyarrow as pa
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, 'X_test.parquet')
-    
-    table = pq.read_table(file_path)
-    # Convertit large_utf8 → utf8 standard pour Streamlit
-    new_fields = [
-        field.with_type(pa.string()) if field.type == pa.large_utf8() else field
-        for field in table.schema
-    ]
-    table = table.cast(pa.schema(new_fields))
-    return table.to_pandas()
+    df = pd.read_parquet(os.path.join(current_dir, 'X_test.parquet'))
+    for col in df.select_dtypes(include='object').columns:
+        df[col] = df[col].astype(str)
+    return df
