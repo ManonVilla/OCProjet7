@@ -17,7 +17,7 @@ client_id = st.session_state.get("client_id", df['SK_ID_CURR'].iloc[0])
 st.sidebar.header("🔍 Recherche Client")
 client_id = st.sidebar.selectbox(
     "Sélectionnez un client",
-    df['SK_ID_CURR'].unique(),
+    df['SK_ID_CURR'].unique().astype(int).tolist(),
     index=int((df['SK_ID_CURR'] == client_id).argmax())
 )
 st.session_state["client_id"] = client_id

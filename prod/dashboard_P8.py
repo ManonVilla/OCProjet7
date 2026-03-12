@@ -22,7 +22,7 @@ if df is None:
 st.sidebar.header("🔍 Recherche Client")
 client_id = st.sidebar.selectbox(
     "Sélectionnez un client",
-    df['SK_ID_CURR'].unique()
+    df['SK_ID_CURR'].unique().astype(int).tolist()
 )
 
 # Stockage dans session_state pour que toutes les pages y aient accès

@@ -44,8 +44,5 @@ def to_years(df, col):
 @st.cache_data
 def load_data():
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    df = pd.read_parquet(
-        os.path.join(current_dir, 'X_test.parquet'),
-        dtype_backend='numpy_nullable'  # ← force les types pandas natifs
-    )
+    df = pd.read_parquet(os.path.join(current_dir, 'X_test.parquet'))
     return df
