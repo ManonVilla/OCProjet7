@@ -64,8 +64,7 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
             st.success("🍃 Crédit accordé : le client présente un risque de défaut faible.")
         st.plotly_chart(fig)
         
-        st.divider() # Ligne de séparation visuelle
-
+        st.markdown("---")
         try:
             #Explication détaillée de la décision
             shap_values_array = np.array(result['shap_values'])
