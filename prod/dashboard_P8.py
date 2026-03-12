@@ -6,6 +6,8 @@ import json
 import shap
 import numpy as np
 import plotly.graph_objects as go
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from graphs import create_gauge_chart
@@ -46,6 +48,7 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
     data_json_str = client_row.to_json()
     data_dict = json.loads(data_json_str)
     api_url = "https://ocprojet7.onrender.com/predict"
+    # api_url = "http://127.0.0.1:8000/predict"
     with st.spinner("Analyse en cours..."):
         response = requests.post(api_url, json={"data": data_dict})
     if response.status_code == 200:
@@ -66,7 +69,7 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
         shap_values_array = np.array(result['shap_values'])
         base_value = result['base_value']
         feature_names = result['feature_names']
-        client_data_values = client_row[feature_names].values
+        client_data_values = client_row[feature_names].values.astype(float)
         
         explanation = shap.Explanation(
             values=shap_values_array,
@@ -74,7 +77,7 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
             data=client_data_values,
             feature_names=feature_names
         )
-        plt.clf()
+        plt.close('all')
         shap.plots.waterfall(explanation, show=False, max_display=10)
         fig_shap = plt.gcf()
         fig_shap.set_size_inches(10, 6)
