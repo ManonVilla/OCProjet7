@@ -66,19 +66,19 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
         
         st.divider() # Ligne de séparation visuelle
 
-        #Explication détaillée de la décision
-        shap_values_array = np.array(result['shap_values'])
-        base_value = result['base_value']
-        feature_names = result['feature_names']
-        client_data_values = client_row[feature_names].values.astype(float)
-        
-        explanation = shap.Explanation(
-            values=shap_values_array,
-            base_values=base_value,
-            data=client_data_values,
-            feature_names=feature_names
-        )
         try:
+            #Explication détaillée de la décision
+            shap_values_array = np.array(result['shap_values'])
+            base_value = result['base_value']
+            feature_names = result['feature_names']
+            client_data_values = client_row[feature_names].values.astype(float)
+            
+            explanation = shap.Explanation(
+                values=shap_values_array,
+                base_values=base_value,
+                data=client_data_values,
+                feature_names=feature_names
+            )
             plt.close('all')
             shap.plots.waterfall(explanation, show=False, max_display=10)
             fig_shap = plt.gcf()
