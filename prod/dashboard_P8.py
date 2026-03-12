@@ -1,4 +1,6 @@
 import os
+import matplotlib
+matplotlib.use('Agg')
 import streamlit as st
 import pandas as pd
 import requests
@@ -6,8 +8,6 @@ import json
 import shap
 import numpy as np
 import plotly.graph_objects as go
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from graphs import create_gauge_chart
@@ -81,6 +81,7 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
         shap.plots.waterfall(explanation, show=False, max_display=10)
         fig_shap = plt.gcf()
         fig_shap.set_size_inches(10, 6)
+        fig_shap.tight_layout()
         st.pyplot(fig_shap, clear_figure=True)
     else:
         st.error(f"Erreur lors de l'analyse du dossier. Veuillez réessayer. Code d'erreur : {response.status_code}")
