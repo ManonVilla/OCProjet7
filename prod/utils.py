@@ -45,4 +45,6 @@ def to_years(df, col):
 def load_data():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     df = pd.read_parquet(os.path.join(current_dir, 'X_test.parquet'))
+    for col in df.select_dtypes(include='object').columns:
+        df[col] = df[col].astype(str)
     return df
