@@ -44,9 +44,8 @@ def to_years(df, col):
 @st.cache_data
 def load_data():
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    df = pd.read_parquet(os.path.join(current_dir, 'X_test.parquet'))
-    # Convertit TOUS les types ArrowDtype (dont LargeUtf8) en types pandas natifs
-    for col in df.columns:
-        if hasattr(df[col].dtype, 'pyarrow_dtype'):
-            df[col] = df[col].astype(str)
+    df = pd.read_parquet(
+        os.path.join(current_dir, 'X_test.parquet'),
+        dtype_backend='numpy_nullable'  # ← force les types pandas natifs
+    )
     return df
