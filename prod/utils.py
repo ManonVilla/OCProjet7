@@ -44,5 +44,8 @@ def to_years(df, col):
 @st.cache_data
 def load_data():
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    df = pd.read_parquet(os.path.join(current_dir, 'X_test.parquet'))
+    df = pd.read_parquet(
+        os.path.join(current_dir, 'X_test.parquet'),
+        engine='fastparquet'  # ← évite PyArrow et donc LargeUtf8
+    )
     return df
