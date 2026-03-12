@@ -1,98 +1,29 @@
-import io
-import os
-import matplotlib
-matplotlib.use('Agg')
 import streamlit as st
-import pandas as pd
-import requests
-import json
-import shap
-import numpy as np
-import plotly.graph_objects as go
-import matplotlib.pyplot as plt
-
-from graphs import create_gauge_chart
+from utils import load_data
 
 st.set_page_config(
-    page_title="Dashboard Projet Scoring",
+    page_title="Dashboard Scoring Crédit",
+    page_icon="💳",
     layout="wide"
 )
 
-SEUIL_OPTIMAL = 0.48
+st.title("💳 Dashboard d'aide à la prise de décision pour les prêts bancaires")
+st.markdown("Utilisez la **barre latérale** pour sélectionner un client et naviguer entre les pages.")
 
-st.title("👩‍💻 Dashboard d'aide à la prise de décision pour les prêts bancaires")
-
-@st.cache_data #pour garder les données en cache et éviter de les recharger à chaque interaction
-def load_data():
-    current_dir = os.path.dirname(__file__)
-    file_path = os.path.join(current_dir, 'X_test.parquet')
-    df = pd.read_parquet(file_path)
-    return df
-
+# ── Chargement des données ────────────────────────────────────────────────────
 df = load_data()
-
 if df is None:
     st.stop()
 
-#Sélection du client dans la barre latérale
+# ── Sélection du client (partagée via session_state) ─────────────────────────
 st.sidebar.header("🔍 Recherche Client")
-client_id = st.sidebar.selectbox("Sélectionnez un client grâce à son identifiant", df['SK_ID_CURR'].unique())
+client_id = st.sidebar.selectbox(
+    "Sélectionnez un client",
+    df['SK_ID_CURR'].unique()
+)
 
-client_row = df[df['SK_ID_CURR'] == client_id].iloc[0]
+# Stockage dans session_state pour que toutes les pages y aient accès
+st.session_state["client_id"] = client_id
+st.session_state["df"] = df
 
-#Ajouter des infos sur le client si possible
-st.subheader(f"Informations sur le client {client_id}")
-#Feature importance spécifique à ce client
-
-
-if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
-    data_json_str = client_row.to_json()
-    data_dict = json.loads(data_json_str)
-    api_url = "https://ocprojet7.onrender.com/predict"
-    # api_url = "http://127.0.0.1:8000/predict"
-    with st.spinner("Analyse en cours..."):
-        response = requests.post(api_url, json={"data": data_dict})
-    if response.status_code == 200:
-        result = response.json()
-        st.success("Analyse terminée !")
-        proba = result['probabilite_defaut']
-        prediction = result['prediction']
-        fig = create_gauge_chart(proba, SEUIL_OPTIMAL)
-        if proba > SEUIL_OPTIMAL:
-            st.warning("🍂 Crédit refusée : le client présente un risque de défaut élevé.")
-        else:
-            st.success("🍃 Crédit accordé : le client présente un risque de défaut faible.")
-        st.plotly_chart(fig)
-        
-        st.markdown("---")
-        try:
-            #Explication détaillée de la décision
-            shap_values_array = np.array(result['shap_values'])
-            base_value = result['base_value']
-            feature_names = result['feature_names']
-            client_data_values = client_row[feature_names].values.astype(float)
-            
-            explanation = shap.Explanation(
-                values=shap_values_array,
-                base_values=base_value,
-                data=client_data_values,
-                feature_names=feature_names
-            )
-            plt.close('all')
-            shap.plots.waterfall(explanation, show=False, max_display=10)
-            fig_shap = plt.gcf()
-            fig_shap.set_size_inches(10, 6)
-            fig_shap.tight_layout()
-            buf = io.BytesIO()
-            fig_shap.savefig(buf, format='png', bbox_inches='tight', dpi=150)
-            buf.seek(0)
-            st.image(buf)
-        except Exception as e:
-            st.error(f"Erreur SHAP : {e}")
-    else:
-        st.error(f"Erreur lors de l'analyse du dossier. Veuillez réessayer. Code d'erreur : {response.status_code}")
-
-st.write(f"Le seuil de décision est {SEUIL_OPTIMAL}. Les clients avec une probabilité de défaut supérieure à ce seuil sont considérés comme présentant un risque élevé.")
-
-
-#Attention pour que ça fonctionne, il faut que le serveur FastAPI soit lancé (uvicorn app:app --reload) et que le modèle soit chargé correctement.
+st.info("👈 Sélectionnez un client dans la barre latérale, puis naviguez vers une page.")
