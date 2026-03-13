@@ -37,7 +37,8 @@ feature_sel = st.sidebar.selectbox(
 
 groupe = st.sidebar.radio(
     "Comparer le client à :",
-    options=["Tous les clients", "Clients acceptés (TARGET=0)", "Clients refusés (TARGET=1)"]
+    # options=["Tous les clients", "Clients acceptés (TARGET=0)", "Clients refusés (TARGET=1)"]
+    options=["Tous les clients"]
 )
 
 # ── Construction du groupe ────────────────────────────────────────────────────
@@ -48,10 +49,10 @@ elif "TARGET" not in df.columns:
     st.warning("⚠️ La colonne TARGET n'est pas disponible dans X_test. La comparaison porte sur tous les clients.")
     df_groupe    = df.copy()
     label_groupe = "tous les clients"
-else:
-    target_val   = 0 if "acceptés" in groupe else 1
-    df_groupe    = df[df["TARGET"] == target_val].copy()
-    label_groupe = "clients acceptés" if target_val == 0 else "clients refusés"
+# else:
+#     target_val   = 0 if "acceptés" in groupe else 1
+#     df_groupe    = df[df["TARGET"] == target_val].copy()
+#     label_groupe = "clients acceptés" if target_val == 0 else "clients refusés"
 
 st.info(f"👥 Groupe sélectionné : **{label_groupe}** — {len(df_groupe):,} clients")
 
