@@ -98,12 +98,14 @@ for col, params in VARIABLES_WIF.items():
 cols_existantes = [c for c in VARIABLES_WIF.keys() if c in df.columns]
 modifie = False
 for col in cols_existantes:
+    val_initiale = valeur_initiale(col, client_row, VARIABLES_WIF[col])
+    val_actuelle = st.session_state.get(col, val_initiale)
     if col == "DAYS_BIRTH":
-        if int(abs(client_row[col]) / 365) != int(abs(client_modifie[col]) / 365):
+        if int(val_initiale) != int(val_actuelle):
             modifie = True
             break
     else:
-        if not np.isclose(float(client_row[col]), float(client_modifie[col]), rtol=1e-3):
+        if not np.isclose(float(val_initiale), float(val_actuelle), rtol=1e-3):
             modifie = True
             break
 
