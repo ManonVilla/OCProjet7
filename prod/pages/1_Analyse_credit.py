@@ -59,7 +59,10 @@ def reset_sliders(client_row):
             st.session_state[col] = valeur_initiale(col, client_row, params)
 
 # Réinitialise si le client a changé
-if st.session_state.get("client_id_precedent") != client_id:
+premier_chargement = "client_id_precedent" not in st.session_state
+client_a_change = st.session_state.get("client_id_precedent") != client_id
+
+if premier_chargement or client_a_change:
     st.session_state["client_id_precedent"] = client_id
     reset_sliders(client_row)
 
