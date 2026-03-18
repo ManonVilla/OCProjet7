@@ -28,7 +28,7 @@ def create_gauge_chart(probability, threshold):
                 'line': {'color': "#2166AC", 'width': 4},
                 'thickness': 0.75,
                 'value': probability
-            }
+            }]
         }
     ))
     
