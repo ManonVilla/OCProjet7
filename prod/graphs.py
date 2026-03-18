@@ -20,17 +20,17 @@ def create_gauge_chart(probability, threshold):
             'borderwidth': 2,
             'bordercolor': "gray",
             'steps': [
-                # Zone Verte (Sûr) : de 0 au Seuil
-                {'range': [0, threshold], 'color': "#33885E"},
-                # Zone Rouge (Risque) : du Seuil à 1
-                {'range': [threshold, 1], 'color': "#810D2A"}],
+                # Zone Bleue (Sûr) : de 0 au Seuil
+                {'range': [0, threshold], 'color': "#2166AC"},,
+                # Zone Orange (Risque) : du Seuil à 1
+                {'range': [threshold, 1], 'color': "#D95F02"},
             'threshold': {
-                'line': {'color': "darkblue", 'width': 4},
+                'line': {'color': "#2166AC", 'width': 4},
                 'thickness': 0.75,
                 'value': probability
             }
         }
     ))
     
-    fig.update_layout(paper_bgcolor = "white", font = {'color': "darkblue", 'family': "Arial"})
+    fig.update_layout(paper_bgcolor = "white", font = {'color': "black", 'family': "Arial"})
     return fig
