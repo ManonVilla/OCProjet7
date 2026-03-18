@@ -45,27 +45,27 @@ VARIABLES_WIF = {
     "EXT_SOURCE_3":     {"label": "Score externe 3",       "min": 0.0,    "max": 1.0,       "step": 0.01},
 }
 
-def get_slider_value(val, params):
-    """Retourne une valeur clampée et valide pour le slider, avec fallback si NaN."""
-    v = float(np.clip(val, params["min"], params["max"]))
+def valeur_initiale(col, client_row, params):
+    """Retourne la valeur initiale du slider pour un client donné."""
+    if col == "DAYS_BIRTH":
+        return int(np.clip(abs(client_row[col]) / 365, params["min"], params["max"]))
+    v = float(np.clip(client_row[col], params["min"], params["max"]))
     return float(params["min"]) if np.isnan(v) else v
 
-def reset_sliders():
-    """Efface les valeurs mémorisées des sliders dans le session_state."""
-    for col in VARIABLES_WIF:
-        if col in st.session_state:
-            del st.session_state[col]
+def reset_sliders(client_row):
+    """Réinitialise les sliders aux valeurs du client."""
+    for col, params in VARIABLES_WIF.items():
+        if col in df.columns:
+            st.session_state[col] = valeur_initiale(col, client_row, params)
 
-# Réinitialise les sliders si le client a changé
+# Réinitialise si le client a changé
 if st.session_state.get("client_id_precedent") != client_id:
     st.session_state["client_id_precedent"] = client_id
-    reset_sliders()
-    st.rerun()
+    reset_sliders(client_row)
 
 # Bouton reset
 if st.sidebar.button("↺ Réinitialiser les valeurs", use_container_width=True):
-    reset_sliders()
-    st.rerun()
+    reset_sliders(client_row)
 
 # Génération des sliders
 client_modifie = client_row.copy()
@@ -75,20 +75,20 @@ for col, params in VARIABLES_WIF.items():
         continue
 
     if col == "DAYS_BIRTH":
-        age_original = int(np.clip(abs(client_row[col]) / 365, params["min"], params["max"]))
         age_slider = st.sidebar.slider(
-            params["label"], params["min"], params["max"], age_original, params["step"], key=col
+            params["label"], params["min"], params["max"],
+            key=col, step=params["step"]
         )
         client_modifie[col] = -age_slider * 365
     elif col in ("EXT_SOURCE_2", "EXT_SOURCE_3"):
-        val = get_slider_value(client_row[col], params)
         client_modifie[col] = st.sidebar.slider(
-            params["label"], float(params["min"]), float(params["max"]), val, float(params["step"]), key=col
+            params["label"], float(params["min"]), float(params["max"]),
+            key=col, step=float(params["step"])
         )
     else:
-        val = get_slider_value(client_row[col], params)
         client_modifie[col] = st.sidebar.slider(
-            params["label"], float(params["min"]), float(params["max"]), val, float(params["step"]), key=col
+            params["label"], float(params["min"]), float(params["max"]),
+            key=col, step=float(params["step"])
         )
 
 # Détection des modifications
