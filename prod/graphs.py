@@ -21,7 +21,7 @@ def create_gauge_chart(probability, threshold):
             'bordercolor': "gray",
             'steps': [
                 # Zone Bleue (Sûr) : de 0 au Seuil
-                {'range': [0, threshold], 'color': "#2166AC"},,
+                {'range': [0, threshold], 'color': "#2166AC"},
                 # Zone Orange (Risque) : du Seuil à 1
                 {'range': [threshold, 1], 'color': "#D95F02"},
             'threshold': {
