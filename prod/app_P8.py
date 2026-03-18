@@ -23,7 +23,7 @@ class ClientData(BaseModel):
 def predict(client_data: ClientData):
     # Convertir les données d'entrée en DataFrame
     input_data = pd.DataFrame([client_data.data])
-    colonnes_inutiles = ['Unnamed: 0', 'SK_ID_CURR', 'TARGET']
+    colonnes_inutiles = ['Unnamed: 0', 'SK_ID_CURR', 'TARGET', 'CODE_GENDER']
     
     for col in colonnes_inutiles:
         if col in input_data.columns:
