@@ -60,6 +60,7 @@ def reset_sliders():
 if st.session_state.get("client_id_precedent") != client_id:
     st.session_state["client_id_precedent"] = client_id
     reset_sliders()
+    st.rerun()
 
 # Bouton reset
 if st.sidebar.button("↺ Réinitialiser les valeurs", use_container_width=True):
@@ -92,7 +93,17 @@ for col, params in VARIABLES_WIF.items():
 
 # Détection des modifications
 cols_existantes = [c for c in VARIABLES_WIF.keys() if c in df.columns]
-modifie = not client_row[cols_existantes].equals(client_modifie[cols_existantes])
+modifie = False
+for col in cols_existantes:
+    if col == "DAYS_BIRTH":
+        if int(abs(client_row[col]) / 365) != int(abs(client_modifie[col]) / 365):
+            modifie = True
+            break
+    else:
+        if not np.isclose(float(client_row[col]), float(client_modifie[col]), rtol=1e-3):
+            modifie = True
+            break
+
 if modifie:
     st.info("⚠️ Les valeurs ont été modifiées par rapport au dossier original.")
 
