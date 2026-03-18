@@ -38,16 +38,18 @@ st.sidebar.caption("Modifiez les valeurs pour simuler un autre profil.")
 
 VARIABLES_WIF = {
     "AMT_INCOME_TOTAL": {"label": "Revenu total (€)",      "min": 10_000, "max": 1_000_000, "step": 5_000},
+    "DAYS_EMPLOYED": {"label": "Ancienneté emploi (années)", "min": 0, "max": 50, "step": 1},
     "AMT_CREDIT":       {"label": "Montant du crédit (€)", "min": 10_000, "max": 2_000_000, "step": 10_000},
     "AMT_ANNUITY":      {"label": "Annuité (€)",           "min": 1_000,  "max": 200_000,   "step": 1_000},
     "DAYS_BIRTH":       {"label": "Âge (années)",          "min": 18,     "max": 70,        "step": 1},
+    "EXT_SOURCE_1":     {"label": "Score externe 1",       "min": 0.0,    "max": 1.0,       "step": 0.01},
     "EXT_SOURCE_2":     {"label": "Score externe 2",       "min": 0.0,    "max": 1.0,       "step": 0.01},
     "EXT_SOURCE_3":     {"label": "Score externe 3",       "min": 0.0,    "max": 1.0,       "step": 0.01},
 }
 
 def valeur_initiale(col, row, params):
     """Retourne la valeur initiale du slider pour un client donné."""
-    if col == "DAYS_BIRTH":
+    if col in ("DAYS_BIRTH", "DAYS_EMPLOYED"):
         return int(np.clip(abs(row[col]) / 365, params["min"], params["max"]))
     v = float(np.clip(row[col], params["min"], params["max"]))
     return float(params["min"]) if np.isnan(v) else round(v, 4)
@@ -73,11 +75,11 @@ client_modifie = client_row.copy()
 for col, params in VARIABLES_WIF.items():
     if col not in df.columns:
         continue
-    if col == "DAYS_BIRTH":
-        age_slider = st.sidebar.slider(
+    if col in ("DAYS_BIRTH", "DAYS_EMPLOYED"):
+        val_slider = st.sidebar.slider(
             params["label"], params["min"], params["max"], step=params["step"], key=col
         )
-        client_modifie[col] = -age_slider * 365
+        client_modifie[col] = -val_slider * 365
     else:
         client_modifie[col] = st.sidebar.slider(
             params["label"], float(params["min"]), float(params["max"]),
