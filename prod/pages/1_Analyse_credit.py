@@ -45,24 +45,21 @@ VARIABLES_WIF = {
     "EXT_SOURCE_3":     {"label": "Score externe 3",       "min": 0.0,    "max": 1.0,       "step": 0.01},
 }
 
-def valeur_initiale(col, client_row, params):
+def valeur_initiale(col, row, params):
     """Retourne la valeur initiale du slider pour un client donné."""
     if col == "DAYS_BIRTH":
-        return int(np.clip(abs(client_row[col]) / 365, params["min"], params["max"]))
-    v = float(np.clip(client_row[col], params["min"], params["max"]))
-    return float(params["min"]) if np.isnan(v) else v
+        return int(np.clip(abs(row[col]) / 365, params["min"], params["max"]))
+    v = float(np.clip(row[col], params["min"], params["max"]))
+    return float(params["min"]) if np.isnan(v) else round(v, 4)
 
-def reset_sliders(client_row):
+def reset_sliders(row):
     """Réinitialise les sliders aux valeurs du client."""
     for col, params in VARIABLES_WIF.items():
         if col in df.columns:
-            st.session_state[col] = valeur_initiale(col, client_row, params)
+            st.session_state[col] = valeur_initiale(col, row, params)
 
-# Réinitialise si le client a changé
-premier_chargement = "client_id_precedent" not in st.session_state
-client_a_change = st.session_state.get("client_id_precedent") != client_id
-
-if premier_chargement or client_a_change:
+# Réinitialise si premier chargement ou changement de client
+if st.session_state.get("client_id_precedent") != client_id:
     st.session_state["client_id_precedent"] = client_id
     reset_sliders(client_row)
 
@@ -70,42 +67,35 @@ if premier_chargement or client_a_change:
 if st.sidebar.button("↺ Réinitialiser les valeurs", use_container_width=True):
     reset_sliders(client_row)
 
-# Génération des sliders
+# Génération des sliders (sans paramètre value= : Streamlit lit session_state[key])
 client_modifie = client_row.copy()
 
 for col, params in VARIABLES_WIF.items():
     if col not in df.columns:
         continue
-
     if col == "DAYS_BIRTH":
         age_slider = st.sidebar.slider(
-            params["label"], params["min"], params["max"],
-            key=col, step=params["step"]
+            params["label"], params["min"], params["max"], step=params["step"], key=col
         )
         client_modifie[col] = -age_slider * 365
-    elif col in ("EXT_SOURCE_2", "EXT_SOURCE_3"):
-        client_modifie[col] = st.sidebar.slider(
-            params["label"], float(params["min"]), float(params["max"]),
-            key=col, step=float(params["step"])
-        )
     else:
         client_modifie[col] = st.sidebar.slider(
             params["label"], float(params["min"]), float(params["max"]),
-            key=col, step=float(params["step"])
+            step=float(params["step"]), key=col
         )
 
-# Détection des modifications
+# Détection des modifications — comparaison sur les valeurs clampées
 cols_existantes = [c for c in VARIABLES_WIF.keys() if c in df.columns]
 modifie = False
 for col in cols_existantes:
-    val_initiale = valeur_initiale(col, client_row, VARIABLES_WIF[col])
-    val_actuelle = st.session_state.get(col, val_initiale)
+    v_init = valeur_initiale(col, client_row, VARIABLES_WIF[col])
+    v_act  = st.session_state.get(col, v_init)
     if col == "DAYS_BIRTH":
-        if int(val_initiale) != int(val_actuelle):
+        if int(v_init) != int(v_act):
             modifie = True
             break
     else:
-        if not np.isclose(float(val_initiale), float(val_actuelle), rtol=1e-3):
+        if not np.isclose(float(v_init), float(v_act), atol=1e-3):
             modifie = True
             break
 
@@ -135,9 +125,16 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
         st.markdown("---")
 
         try:
-            shap_values_array  = np.array(result['shap_values'])
-            base_value         = result['base_value']
-            feature_names      = result['feature_names']
+            shap_values_array = np.array(result['shap_values'])
+            base_value        = result['base_value']
+            feature_names     = result['feature_names']
+
+            # Exclure CODE_GENDER du graphique SHAP
+            if 'CODE_GENDER' in feature_names:
+                idx = feature_names.index('CODE_GENDER')
+                shap_values_array = np.delete(shap_values_array, idx)
+                feature_names.pop(idx)
+
             client_data_values = client_modifie[feature_names].values.astype(float)
 
             explanation = shap.Explanation(
