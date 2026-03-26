@@ -3,7 +3,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import streamlit as st
 import pandas as pd
-import numpy as np
 import plotly.express as px
 
 from utils import load_data, FEATURES_COMPARAISON, to_years
@@ -24,7 +23,7 @@ client_id = st.sidebar.selectbox(
 st.session_state["client_id"] = client_id
 client_row = df[df['SK_ID_CURR'] == client_id].iloc[0]
 
-# ── Filtres sidebar ───────────────────────────────────────────────────────────
+# ── Filtres ───────────────────────────────────────────────────────────────────
 st.sidebar.markdown("---")
 st.sidebar.header("⚙️ Filtres comparaison")
 
@@ -38,6 +37,7 @@ feature_sel = st.sidebar.selectbox(
 
 groupe = st.sidebar.radio(
     "Comparer le client à :",
+    # options=["Tous les clients", "Clients acceptés (TARGET=0)", "Clients refusés (TARGET=1)"]
     options=["Tous les clients"]
 )
 
@@ -56,9 +56,7 @@ else:
 
 st.info(f"👥 Groupe sélectionné : **{label_groupe}** — {len(df_groupe):,} clients")
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 1 — Histogramme (code original conservé, couleurs accessibles)
-# ═══════════════════════════════════════════════════════════════════════════════
+# ── Histogramme ───────────────────────────────────────────────────────────────
 st.markdown(f"### Distribution de **{feats_dispo[feature_sel]}**")
 
 serie      = to_years(df_groupe, feature_sel).dropna()
@@ -69,13 +67,13 @@ fig_hist = px.histogram(
     nbins=50,
     labels={"value": feats_dispo[feature_sel], "count": "Nb clients"},
     opacity=0.75,
-    color_discrete_sequence=["#2166AC"],
+    color_discrete_sequence=["#33885E"],
     title=f"Distribution — {label_groupe}"
 )
 fig_hist.add_vline(
     x=val_client,
     line_dash="dash",
-    line_color="black",
+    line_color="red",
     line_width=2,
     annotation_text=f"  Client {client_id}",
     annotation_position="top right"
@@ -98,121 +96,71 @@ col_d.metric("Max",               f"{serie.max():,.2f}")
 percentile = (serie < val_client).mean() * 100
 col_e.metric("Percentile client", f"{percentile:.1f}e")
 
-# # ═══════════════════════════════════════════════════════════════════════════════
-# # SECTION 2 — Boxplot par tranche d'âge ou de revenu
-# # ═══════════════════════════════════════════════════════════════════════════════
-# st.markdown("---")
-# st.markdown("### 🎻 Boxplot par tranche")
+# ═══════════════════════════════════════════════════════════════════════════════
+# SECTION 2 — Boxplot par tranche d'âge ou de revenu
+# ═══════════════════════════════════════════════════════════════════════════════
+st.markdown("---")
+st.markdown("### 🎻 Boxplot par tranche")
 
-# col1, col2 = st.columns(2)
-# with col1:
-#     feat_box = st.selectbox(
-#         "Variable à analyser",
-#         options=list(feats_dispo.keys()),
-#         format_func=lambda x: feats_dispo[x],
-#         key="feat_box"
-#     )
-# with col2:
-#     tranche_par = st.selectbox(
-#         "Découper par tranche de",
-#         options=["Âge", "Revenu"],
-#         key="tranche_par"
-#     )
+col1, col2 = st.columns(2)
+with col1:
+    feat_box = st.selectbox(
+        "Variable à analyser",
+        options=list(feats_dispo.keys()),
+        format_func=lambda x: feats_dispo[x],
+        key="feat_box"
+    )
+with col2:
+    tranche_par = st.selectbox(
+        "Découper par tranche de",
+        options=["Âge", "Revenu"],
+        key="tranche_par"
+    )
 
-# try:
-#     df_box = df_groupe.copy()
-#     df_box["valeur"] = to_years(df_box, feat_box)
+df_box = df_groupe.copy()
+df_box["valeur"] = to_years(df_box, feat_box)
 
-#     if tranche_par == "Âge" and "DAYS_BIRTH" in df_box.columns:
-#         df_box["Tranche"] = pd.cut(
-#             df_box["DAYS_BIRTH"].abs() / 365,
-#             bins=[18, 30, 45, 60, 100],
-#             labels=["18-30 ans", "30-45 ans", "45-60 ans", "60+ ans"]
-#         )
-#         age_client = abs(client_row["DAYS_BIRTH"]) / 365
-#         if age_client < 30:       tranche_client = "18-30 ans"
-#         elif age_client < 45:     tranche_client = "30-45 ans"
-#         elif age_client < 60:     tranche_client = "45-60 ans"
-#         else:                     tranche_client = "60+ ans"
+if tranche_par == "Âge" and "DAYS_BIRTH" in df_box.columns:
+    df_box["Tranche"] = pd.cut(
+        df_box["DAYS_BIRTH"].abs() / 365,
+        bins=[18, 30, 45, 60, 100],
+        labels=["18-30 ans", "30-45 ans", "45-60 ans", "60+ ans"]
+    )
+    age_client = abs(client_row["DAYS_BIRTH"]) / 365
+    if age_client < 30:       tranche_client = "18-30 ans"
+    elif age_client < 45:     tranche_client = "30-45 ans"
+    elif age_client < 60:     tranche_client = "45-60 ans"
+    else:                     tranche_client = "60+ ans"
 
-#     else:  # Revenu
-#         quantiles = df_box["AMT_INCOME_TOTAL"].quantile([0, 0.25, 0.5, 0.75, 1.0]).values
-#         df_box["Tranche"] = pd.cut(
-#             df_box["AMT_INCOME_TOTAL"],
-#             bins=quantiles,
-#             labels=["Q1 (bas)", "Q2", "Q3", "Q4 (haut)"],
-#             duplicates="drop"
-#         )
-#         revenu_client = client_row["AMT_INCOME_TOTAL"]
-#         if revenu_client <= quantiles[1]:     tranche_client = "Q1 (bas)"
-#         elif revenu_client <= quantiles[2]:   tranche_client = "Q2"
-#         elif revenu_client <= quantiles[3]:   tranche_client = "Q3"
-#         else:                                 tranche_client = "Q4 (haut)"
+else:  # Revenu
+    quantiles = df_box["AMT_INCOME_TOTAL"].quantile([0, 0.25, 0.5, 0.75, 1.0]).values
+    df_box["Tranche"] = pd.cut(
+        df_box["AMT_INCOME_TOTAL"],
+        bins=quantiles,
+        labels=["Q1 (bas)", "Q2", "Q3", "Q4 (haut)"],
+        duplicates="drop"
+    )
+    revenu_client = client_row["AMT_INCOME_TOTAL"]
+    if revenu_client <= quantiles[1]:     tranche_client = "Q1 (bas)"
+    elif revenu_client <= quantiles[2]:   tranche_client = "Q2"
+    elif revenu_client <= quantiles[3]:   tranche_client = "Q3"
+    else:                                 tranche_client = "Q4 (haut)"
 
-#     val_client_box = to_years(pd.DataFrame([client_row]), feat_box).iloc[0]
-#     df_box = df_box.dropna(subset=["Tranche", "valeur"])
+val_client_box = to_years(pd.DataFrame([client_row]), feat_box).iloc[0]
+df_box = df_box.dropna(subset=["Tranche", "valeur"])
 
-#     fig_box = px.box(
-#         df_box, x="Tranche", y="valeur",
-#         color="Tranche",
-#         color_discrete_sequence=["#2166AC", "#5DA8D1", "#D95F02", "#F4A55A"],
-#         labels={"valeur": feats_dispo[feat_box], "Tranche": tranche_par},
-#         title=f"{feats_dispo[feat_box]} par tranche de {tranche_par.lower()}"
-#     )
-#     fig_box.add_scatter(
-#         x=[tranche_client], y=[val_client_box],
-#         mode="markers",
-#         marker=dict(color="black", size=12, symbol="diamond"),
-#         name=f"Client {client_id}"
-#     )
-#     fig_box.update_layout(height=450, showlegend=True)
-#     st.plotly_chart(fig_box, use_container_width=True)
-
-# except Exception as e:
-#     st.error(f"Erreur boxplot : {type(e).__name__} — {e}")
-
-# # ═══════════════════════════════════════════════════════════════════════════════
-# # SECTION 3 — Scatter plot (2 variables numériques)
-# # ═══════════════════════════════════════════════════════════════════════════════
-# st.markdown("---")
-# st.markdown("### 🔵 Scatter plot — 2 variables numériques")
-
-# col1, col2 = st.columns(2)
-# with col1:
-#     feat_x = st.selectbox(
-#         "Variable X",
-#         options=list(feats_dispo.keys()),
-#         format_func=lambda x: feats_dispo[x],
-#         key="feat_x"
-#     )
-# with col2:
-#     feat_y = st.selectbox(
-#         "Variable Y",
-#         options=list(feats_dispo.keys()),
-#         index=1,
-#         format_func=lambda x: feats_dispo[x],
-#         key="feat_y"
-#     )
-
-# df_scatter = df_groupe.sample(min(2000, len(df_groupe)), random_state=42).copy()
-# df_scatter["x"] = to_years(df_scatter, feat_x)
-# df_scatter["y"] = to_years(df_scatter, feat_y)
-
-# val_x_client = to_years(pd.DataFrame([client_row]), feat_x).iloc[0]
-# val_y_client = to_years(pd.DataFrame([client_row]), feat_y).iloc[0]
-
-# fig_scatter = px.scatter(
-#     df_scatter, x="x", y="y",
-#     opacity=0.3,
-#     color_discrete_sequence=["#2166AC"],
-#     labels={"x": feats_dispo[feat_x], "y": feats_dispo[feat_y]},
-#     title=f"{feats_dispo[feat_x]} vs {feats_dispo[feat_y]} — {label_groupe}"
-# )
-# fig_scatter.add_scatter(
-#     x=[val_x_client], y=[val_y_client],
-#     mode="markers",
-#     marker=dict(color="black", size=14, symbol="diamond"),
-#     name=f"Client {client_id}"
-# )
-# fig_scatter.update_layout(height=500)
-# st.plotly_chart(fig_scatter, use_container_width=True)
+fig_box = px.box(
+    df_box, x="Tranche", y="valeur",
+    color="Tranche",
+    color_discrete_sequence=["#2166AC", "#5DA8D1", "#D95F02", "#F4A55A"],
+    labels={"valeur": feats_dispo[feat_box], "Tranche": tranche_par},
+    title=f"{feats_dispo[feat_box]} par tranche de {tranche_par.lower()}"
+)
+fig_box.add_scatter(
+    x=[tranche_client], y=[val_client_box],
+    mode="markers",
+    marker=dict(color="black", size=12, symbol="diamond"),
+    name=f"Client {client_id}"
+)
+fig_box.update_layout(height=450, showlegend=True)
+st.plotly_chart(fig_box, use_container_width=True)
