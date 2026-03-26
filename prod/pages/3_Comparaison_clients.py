@@ -205,7 +205,7 @@ fig_scatter = px.scatter(
 fig_scatter.add_scatter(
     x=[val_x_client], y=[val_y_client],
     mode="markers",
-    marker=dict(color="black", size=14, symbol="diamond"),
+    marker=dict(color="#D95F02", size=14, symbol="diamond"),
     name=f"Client {client_id}"
 )
 fig_scatter.update_layout(height=500)
