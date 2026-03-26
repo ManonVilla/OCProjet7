@@ -35,31 +35,31 @@ feature_sel = st.sidebar.selectbox(
     format_func=lambda x: feats_dispo[x]
 )
 
-groupe = st.sidebar.radio(
-    "Comparer le client à :",
-    # options=["Tous les clients", "Clients acceptés (TARGET=0)", "Clients refusés (TARGET=1)"]
-    options=["Tous les clients"]
-)
+# groupe = st.sidebar.radio(
+#     "Comparer le client à :",
+#     # options=["Tous les clients", "Clients acceptés (TARGET=0)", "Clients refusés (TARGET=1)"]
+#     options=["Tous les clients"]
+# )
 
 # ── Construction du groupe ────────────────────────────────────────────────────
-if groupe == "Tous les clients":
-    df_groupe    = df.copy()
-    label_groupe = "tous les clients"
-elif "TARGET" not in df.columns:
-    st.warning("⚠️ La colonne TARGET n'est pas disponible dans X_test. La comparaison porte sur tous les clients.")
-    df_groupe    = df.copy()
-    label_groupe = "tous les clients"
-else:
-    target_val   = 0 if "acceptés" in groupe else 1
-    df_groupe    = df[df["TARGET"] == target_val].copy()
-    label_groupe = "clients acceptés" if target_val == 0 else "clients refusés"
+# if groupe == "Tous les clients":
+#     df_groupe    = df.copy()
+#     label_groupe = "tous les clients"
+# elif "TARGET" not in df.columns:
+#     st.warning("⚠️ La colonne TARGET n'est pas disponible dans X_test. La comparaison porte sur tous les clients.")
+#     df_groupe    = df.copy()
+#     label_groupe = "tous les clients
+# else:
+#     target_val   = 0 if "acceptés" in groupe else 1
+#     df_groupe    = df[df["TARGET"] == target_val].copy()
+#     label_groupe = "clients acceptés" if target_val == 0 else "clients refusés"
 
-st.info(f"👥 Groupe sélectionné : **{label_groupe}** — {len(df_groupe):,} clients")
+# st.info(f"👥 Groupe sélectionné : **{label_groupe}** — {len(df_groupe):,} clients")
 
 # ── Histogramme ───────────────────────────────────────────────────────────────
 st.markdown(f"### Distribution de **{feats_dispo[feature_sel]}**")
 
-serie      = to_years(df_groupe, feature_sel).dropna()
+serie      = to_years(df, feature_sel).dropna()
 val_client = to_years(pd.DataFrame([client_row]), feature_sel).iloc[0]
 
 fig_hist = px.histogram(
@@ -68,7 +68,7 @@ fig_hist = px.histogram(
     labels={"value": feats_dispo[feature_sel], "count": "Nb clients"},
     opacity=0.75,
     color_discrete_sequence=["#33885E"],
-    title=f"Distribution — {label_groupe}"
+    title="Distribution totale"
 )
 fig_hist.add_vline(
     x=val_client,
@@ -94,7 +94,7 @@ col_b.metric("Médiane",           f"{serie.median():,.2f}")
 col_c.metric("Min",               f"{serie.min():,.2f}")
 col_d.metric("Max",               f"{serie.max():,.2f}")
 percentile = (serie < val_client).mean() * 100
-col_e.metric("Percentile client", f"{percentile:.1f}e")
+col_e.metric("Position dans le groupe", f"{percentile:.0f}%")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # SECTION 2 — Boxplot par tranche d'âge ou de revenu
@@ -117,7 +117,7 @@ with col2:
         key="tranche_par"
     )
 
-df_box = df_groupe.copy()
+df_box = df.copy()
 df_box["valeur"] = to_years(df_box, feat_box)
 
 if tranche_par == "Âge" and "DAYS_BIRTH" in df_box.columns:
@@ -188,7 +188,7 @@ with col2:
         key="feat_y"
     )
 
-df_scatter = df_groupe.sample(min(2000, len(df_groupe)), random_state=42).copy()
+df_scatter = df.sample(min(2000, len(df)), random_state=42).copy()
 df_scatter["x"] = to_years(df_scatter, feat_x)
 df_scatter["y"] = to_years(df_scatter, feat_y)
 
