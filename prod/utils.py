@@ -18,7 +18,7 @@ FEATURES_LISIBLES = {
     "EXT_SOURCE_3":               ("Score externe 3",        lambda x: f"{x:.3f}"),
     "CNT_CHILDREN":               ("Nb enfants",             lambda x: str(int(x))),
     "CNT_FAM_MEMBERS":            ("Nb membres famille",     lambda x: str(int(x))),
-    "REGION_POPULATION_RELATIVE": ("Pop. région",            lambda x: f"{x:.5f}"),
+    "REGION_POPULATION_RELATIVE": ("Densité de population de la région (normalisée)",            lambda x: f"{x:.5f}"),
 }
 
 FEATURES_COMPARAISON = {
