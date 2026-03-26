@@ -171,48 +171,48 @@ col_e.metric("Percentile client", f"{percentile:.1f}e")
 # except Exception as e:
 #     st.error(f"Erreur boxplot : {type(e).__name__} — {e}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 3 — Scatter plot (2 variables numériques)
-# ═══════════════════════════════════════════════════════════════════════════════
-st.markdown("---")
-st.markdown("### 🔵 Scatter plot — 2 variables numériques")
+# # ═══════════════════════════════════════════════════════════════════════════════
+# # SECTION 3 — Scatter plot (2 variables numériques)
+# # ═══════════════════════════════════════════════════════════════════════════════
+# st.markdown("---")
+# st.markdown("### 🔵 Scatter plot — 2 variables numériques")
 
-col1, col2 = st.columns(2)
-with col1:
-    feat_x = st.selectbox(
-        "Variable X",
-        options=list(feats_dispo.keys()),
-        format_func=lambda x: feats_dispo[x],
-        key="feat_x"
-    )
-with col2:
-    feat_y = st.selectbox(
-        "Variable Y",
-        options=list(feats_dispo.keys()),
-        index=1,
-        format_func=lambda x: feats_dispo[x],
-        key="feat_y"
-    )
+# col1, col2 = st.columns(2)
+# with col1:
+#     feat_x = st.selectbox(
+#         "Variable X",
+#         options=list(feats_dispo.keys()),
+#         format_func=lambda x: feats_dispo[x],
+#         key="feat_x"
+#     )
+# with col2:
+#     feat_y = st.selectbox(
+#         "Variable Y",
+#         options=list(feats_dispo.keys()),
+#         index=1,
+#         format_func=lambda x: feats_dispo[x],
+#         key="feat_y"
+#     )
 
-df_scatter = df_groupe.sample(min(2000, len(df_groupe)), random_state=42).copy()
-df_scatter["x"] = to_years(df_scatter, feat_x)
-df_scatter["y"] = to_years(df_scatter, feat_y)
+# df_scatter = df_groupe.sample(min(2000, len(df_groupe)), random_state=42).copy()
+# df_scatter["x"] = to_years(df_scatter, feat_x)
+# df_scatter["y"] = to_years(df_scatter, feat_y)
 
-val_x_client = to_years(pd.DataFrame([client_row]), feat_x).iloc[0]
-val_y_client = to_years(pd.DataFrame([client_row]), feat_y).iloc[0]
+# val_x_client = to_years(pd.DataFrame([client_row]), feat_x).iloc[0]
+# val_y_client = to_years(pd.DataFrame([client_row]), feat_y).iloc[0]
 
-fig_scatter = px.scatter(
-    df_scatter, x="x", y="y",
-    opacity=0.3,
-    color_discrete_sequence=["#2166AC"],
-    labels={"x": feats_dispo[feat_x], "y": feats_dispo[feat_y]},
-    title=f"{feats_dispo[feat_x]} vs {feats_dispo[feat_y]} — {label_groupe}"
-)
-fig_scatter.add_scatter(
-    x=[val_x_client], y=[val_y_client],
-    mode="markers",
-    marker=dict(color="black", size=14, symbol="diamond"),
-    name=f"Client {client_id}"
-)
-fig_scatter.update_layout(height=500)
-st.plotly_chart(fig_scatter, use_container_width=True)
+# fig_scatter = px.scatter(
+#     df_scatter, x="x", y="y",
+#     opacity=0.3,
+#     color_discrete_sequence=["#2166AC"],
+#     labels={"x": feats_dispo[feat_x], "y": feats_dispo[feat_y]},
+#     title=f"{feats_dispo[feat_x]} vs {feats_dispo[feat_y]} — {label_groupe}"
+# )
+# fig_scatter.add_scatter(
+#     x=[val_x_client], y=[val_y_client],
+#     mode="markers",
+#     marker=dict(color="black", size=14, symbol="diamond"),
+#     name=f"Client {client_id}"
+# )
+# fig_scatter.update_layout(height=500)
+# st.plotly_chart(fig_scatter, use_container_width=True)
