@@ -98,78 +98,78 @@ col_d.metric("Max",               f"{serie.max():,.2f}")
 percentile = (serie < val_client).mean() * 100
 col_e.metric("Percentile client", f"{percentile:.1f}e")
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 2 — Boxplot par tranche d'âge ou de revenu
-# ═══════════════════════════════════════════════════════════════════════════════
-st.markdown("---")
-st.markdown("### 🎻 Boxplot par tranche")
+# # ═══════════════════════════════════════════════════════════════════════════════
+# # SECTION 2 — Boxplot par tranche d'âge ou de revenu
+# # ═══════════════════════════════════════════════════════════════════════════════
+# st.markdown("---")
+# st.markdown("### 🎻 Boxplot par tranche")
 
-col1, col2 = st.columns(2)
-with col1:
-    feat_box = st.selectbox(
-        "Variable à analyser",
-        options=list(feats_dispo.keys()),
-        format_func=lambda x: feats_dispo[x],
-        key="feat_box"
-    )
-with col2:
-    tranche_par = st.selectbox(
-        "Découper par tranche de",
-        options=["Âge", "Revenu"],
-        key="tranche_par"
-    )
+# col1, col2 = st.columns(2)
+# with col1:
+#     feat_box = st.selectbox(
+#         "Variable à analyser",
+#         options=list(feats_dispo.keys()),
+#         format_func=lambda x: feats_dispo[x],
+#         key="feat_box"
+#     )
+# with col2:
+#     tranche_par = st.selectbox(
+#         "Découper par tranche de",
+#         options=["Âge", "Revenu"],
+#         key="tranche_par"
+#     )
 
-try:
-    df_box = df_groupe.copy()
-    df_box["valeur"] = to_years(df_box, feat_box)
+# try:
+#     df_box = df_groupe.copy()
+#     df_box["valeur"] = to_years(df_box, feat_box)
 
-    if tranche_par == "Âge" and "DAYS_BIRTH" in df_box.columns:
-        df_box["Tranche"] = pd.cut(
-            df_box["DAYS_BIRTH"].abs() / 365,
-            bins=[18, 30, 45, 60, 100],
-            labels=["18-30 ans", "30-45 ans", "45-60 ans", "60+ ans"]
-        )
-        age_client = abs(client_row["DAYS_BIRTH"]) / 365
-        if age_client < 30:       tranche_client = "18-30 ans"
-        elif age_client < 45:     tranche_client = "30-45 ans"
-        elif age_client < 60:     tranche_client = "45-60 ans"
-        else:                     tranche_client = "60+ ans"
+#     if tranche_par == "Âge" and "DAYS_BIRTH" in df_box.columns:
+#         df_box["Tranche"] = pd.cut(
+#             df_box["DAYS_BIRTH"].abs() / 365,
+#             bins=[18, 30, 45, 60, 100],
+#             labels=["18-30 ans", "30-45 ans", "45-60 ans", "60+ ans"]
+#         )
+#         age_client = abs(client_row["DAYS_BIRTH"]) / 365
+#         if age_client < 30:       tranche_client = "18-30 ans"
+#         elif age_client < 45:     tranche_client = "30-45 ans"
+#         elif age_client < 60:     tranche_client = "45-60 ans"
+#         else:                     tranche_client = "60+ ans"
 
-    else:  # Revenu
-        quantiles = df_box["AMT_INCOME_TOTAL"].quantile([0, 0.25, 0.5, 0.75, 1.0]).values
-        df_box["Tranche"] = pd.cut(
-            df_box["AMT_INCOME_TOTAL"],
-            bins=quantiles,
-            labels=["Q1 (bas)", "Q2", "Q3", "Q4 (haut)"],
-            duplicates="drop"
-        )
-        revenu_client = client_row["AMT_INCOME_TOTAL"]
-        if revenu_client <= quantiles[1]:     tranche_client = "Q1 (bas)"
-        elif revenu_client <= quantiles[2]:   tranche_client = "Q2"
-        elif revenu_client <= quantiles[3]:   tranche_client = "Q3"
-        else:                                 tranche_client = "Q4 (haut)"
+#     else:  # Revenu
+#         quantiles = df_box["AMT_INCOME_TOTAL"].quantile([0, 0.25, 0.5, 0.75, 1.0]).values
+#         df_box["Tranche"] = pd.cut(
+#             df_box["AMT_INCOME_TOTAL"],
+#             bins=quantiles,
+#             labels=["Q1 (bas)", "Q2", "Q3", "Q4 (haut)"],
+#             duplicates="drop"
+#         )
+#         revenu_client = client_row["AMT_INCOME_TOTAL"]
+#         if revenu_client <= quantiles[1]:     tranche_client = "Q1 (bas)"
+#         elif revenu_client <= quantiles[2]:   tranche_client = "Q2"
+#         elif revenu_client <= quantiles[3]:   tranche_client = "Q3"
+#         else:                                 tranche_client = "Q4 (haut)"
 
-    val_client_box = to_years(pd.DataFrame([client_row]), feat_box).iloc[0]
-    df_box = df_box.dropna(subset=["Tranche", "valeur"])
+#     val_client_box = to_years(pd.DataFrame([client_row]), feat_box).iloc[0]
+#     df_box = df_box.dropna(subset=["Tranche", "valeur"])
 
-    fig_box = px.box(
-        df_box, x="Tranche", y="valeur",
-        color="Tranche",
-        color_discrete_sequence=["#2166AC", "#5DA8D1", "#D95F02", "#F4A55A"],
-        labels={"valeur": feats_dispo[feat_box], "Tranche": tranche_par},
-        title=f"{feats_dispo[feat_box]} par tranche de {tranche_par.lower()}"
-    )
-    fig_box.add_scatter(
-        x=[tranche_client], y=[val_client_box],
-        mode="markers",
-        marker=dict(color="black", size=12, symbol="diamond"),
-        name=f"Client {client_id}"
-    )
-    fig_box.update_layout(height=450, showlegend=True)
-    st.plotly_chart(fig_box, use_container_width=True)
+#     fig_box = px.box(
+#         df_box, x="Tranche", y="valeur",
+#         color="Tranche",
+#         color_discrete_sequence=["#2166AC", "#5DA8D1", "#D95F02", "#F4A55A"],
+#         labels={"valeur": feats_dispo[feat_box], "Tranche": tranche_par},
+#         title=f"{feats_dispo[feat_box]} par tranche de {tranche_par.lower()}"
+#     )
+#     fig_box.add_scatter(
+#         x=[tranche_client], y=[val_client_box],
+#         mode="markers",
+#         marker=dict(color="black", size=12, symbol="diamond"),
+#         name=f"Client {client_id}"
+#     )
+#     fig_box.update_layout(height=450, showlegend=True)
+#     st.plotly_chart(fig_box, use_container_width=True)
 
-except Exception as e:
-    st.error(f"Erreur boxplot : {type(e).__name__} — {e}")
+# except Exception as e:
+#     st.error(f"Erreur boxplot : {type(e).__name__} — {e}")
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # SECTION 3 — Scatter plot (2 variables numériques)
