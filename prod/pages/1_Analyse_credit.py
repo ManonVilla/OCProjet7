@@ -164,4 +164,6 @@ if st.button(f"Lancer l'analyse du dossier {client_id}", type="primary"):
     else:
         st.error(f"Erreur lors de l'analyse. Code : {response.status_code}")
 
-st.caption(f"Seuil de décision : {SEUIL_OPTIMAL}. Au-delà, le risque de défaut est considéré élevé.")
+st.caption(f"Les valeurs SHAP sont exprimées sur l'échelle logit du modèle, "
+           "pas directement en probabilité. Une somme négative ne signifie pas "
+           "nécessairement que le crédit est accordé. Seuil de décision : {SEUIL_OPTIMAL}. Au-delà, le risque de défaut est considéré élevé.")

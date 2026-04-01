@@ -35,6 +35,8 @@ feature_sel = st.sidebar.selectbox(
     format_func=lambda x: feats_dispo[x]
 )
 
+label_groupe = "tous les clients" 
+
 # groupe = st.sidebar.radio(
 #     "Comparer le client à :",
 #     # options=["Tous les clients", "Clients acceptés (TARGET=0)", "Clients refusés (TARGET=1)"]
