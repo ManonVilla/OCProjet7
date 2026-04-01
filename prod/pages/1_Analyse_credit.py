@@ -50,7 +50,10 @@ VARIABLES_WIF = {
 def valeur_initiale(col, row, params):
     """Retourne la valeur initiale du slider pour un client donné."""
     if col in ("DAYS_BIRTH", "DAYS_EMPLOYED"):
-        return int(np.clip(abs(row[col]) / 365, params["min"], params["max"]))
+        v = abs(row[col]) / 365
+        if np.isnan(v):
+            return params["min"]
+        return int(np.clip(v, params["min"], params["max"]))
     v = float(np.clip(row[col], params["min"], params["max"]))
     return float(params["min"]) if np.isnan(v) else round(v, 4)
 
